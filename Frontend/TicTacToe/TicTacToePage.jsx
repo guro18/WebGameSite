@@ -10,29 +10,29 @@ export default function TicTacToePage() {
   const [socket, setSocket] = useState(null);
   const [playerName, setPlayerName] = useState("");
 
-  useEffect(() => {
-    const newSocket = new WebSocket(
-      "wss://backend20240610112356.azurewebsites.net/tictactoe"
-    );
-    setSocket(newSocket);
+  // useEffect(() => {
+  //   const newSocket = new WebSocket(
+  //     "wss://backend20240610112356.azurewebsites.net/tictactoe"
+  //   );
+  //   setSocket(newSocket);
 
-    newSocket.onopen = () => {
-      console.log("Connected to WebSocket server");
-    };
+  //   newSocket.onopen = () => {
+  //     console.log("Connected to WebSocket server");
+  //   };
 
-    newSocket.onclose = () => {
-      console.log("Disconnected from WebSocket server");
-    };
+  //   newSocket.onclose = () => {
+  //     console.log("Disconnected from WebSocket server");
+  //   };
 
-    newSocket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      console.log(data);
-      // handle received data
-    };
-    return () => {
-      newSocket.close();
-    };
-  }, []);
+  //   newSocket.onmessage = (event) => {
+  //     const data = JSON.parse(event.data);
+  //     console.log(data);
+  //     // handle received data
+  //   };
+  //   return () => {
+  //     newSocket.close();
+  //   };
+  // }, []);
 
   return (
     <>
