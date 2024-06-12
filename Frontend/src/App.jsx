@@ -9,17 +9,17 @@ import ScorePage from '../Quiz/ScorePage'
 
 function App() {
   return (
-    // <>
-    //   <Routes>
-    //     <Route path="/" element={<HomePage />} />
-    //     <Route path="/*" element={<TicTacToePage />} />
-    //     <Route path='/quiz' element={<QuizHomePage/>}/>
-    //     <Route path='/quiz/takeQuiz/:questionId' element={<QuestionPage/>}/>
-    //     <Route path='/quiz/submission' element={<SubmissionPage/>}/>
-    //     <Route path='/quiz/scorePage' element={<ScorePage/>}/>
-    //   </Routes>
-    // </>
-    <h1>hej</h1>
+    <>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/*" element={<TicTacToePage />} /> */}
+        <Route path='/quiz' element={<QuizHomePage/>}/>
+        <Route path='/quiz/takeQuiz/:questionId' element={<QuestionPage/>}/>
+        <Route path='/quiz/submission' element={<SubmissionPage/>}/>
+        <Route path='/quiz/scorePage' element={<ScorePage/>}/>
+      </Routes>
+    </>
+    // <h1>hej</h1>
   );
 }
 
