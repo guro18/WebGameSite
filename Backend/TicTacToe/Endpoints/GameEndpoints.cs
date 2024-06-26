@@ -23,20 +23,13 @@ namespace Endpoints
             game.MapPost("rooms/{roomId}/reset", ResetGame);
         }
 
-        [EnableCors] // Enable CORS for this endpoint
-        private static async Task GetWebSocketConnection(HttpContext context, WebSocketService webSocketService)
+        [EnableCors]
+        private static async Task<IResult> GetWebSocketConnection(WebSocketService webSocketService)
         {
-            if (context.WebSockets.IsWebSocketRequest)
-            {
-                var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-                await webSocketService.HandleWebSocketConnection(webSocket);
-            }
-            else
-            {
-                context.Response.StatusCode = 400;
-                await context.Response.WriteAsync("Expected a WebSocket request");
-            }
+            var connection = await webSocketService.HandleWebSocketConnection();
+            return Results.Ok(connection);
         }
+
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

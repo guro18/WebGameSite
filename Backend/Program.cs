@@ -1,6 +1,7 @@
 using Endpoints;
 using Repository;
 using Services;
+using Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,13 +14,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IGameRepository, GameRepository>();
 builder.Services.AddSingleton<WebSocketService>();
 
+builder.Services.Configure<AzureWebPubSubSettings>(builder.Configuration.GetSection("AzureWebPubSub"));
+
 
 // //Connection to the frontend
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:5173")
+        builder.WithOrigins("http://localhost:5174", "https://guro18.github.io/WebGameSite/")
                .AllowAnyHeader()
                .AllowAnyMethod()
                .AllowCredentials();
@@ -27,8 +30,6 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
-
-app.UseCors();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -47,6 +48,8 @@ app.MapControllers();
 app.UseWebSockets();
 
 app.UseRouting();
+
+app.UseCors();
 
 app.ConfigureTicTacToeEndpoints();
 
